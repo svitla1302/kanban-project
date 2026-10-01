@@ -1,5 +1,10 @@
-import Image from "next/image";
+
+import KanbanBoard from "./kanban/page";
+
 
 export default function Home() {
-  return 
+  return (
+     <KanbanBoard />
+  )
+
 }
