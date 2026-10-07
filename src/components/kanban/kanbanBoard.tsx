@@ -1,8 +1,10 @@
 'use client';
 import React, { useEffect, useState, useRef } from 'react';
-import { cardsData, columnsData } from '../../components/kanban/dataObject';
+import { cardsData, columnsData } from './DataObject';
 import KabanColumn from './KanbanColumn';
-import AddTask from './addTask';
+import AddTask from './AddTask';
+import EditCard from './EditCard';
+import type { Card } from './DataObject';
 
 interface Props {}
 
@@ -10,6 +12,8 @@ export default function KanbanBoard(props: Props) {
   const [cards, setCards] = useState(cardsData);
   const [kanbans, setKanbans] = useState(columnsData);
   const [isLoaded, setIsLoaded] = useState(false);
+  const [editingCard, setEditingCard] = useState<Card | null>(null);
+  const [editOpen, setEditOpen] = useState(false);
 
   useEffect(() => {
     try {
@@ -114,13 +118,73 @@ export default function KanbanBoard(props: Props) {
 
     setCards((prevCards) => [...prevCards, newCard]);
   }
+
+  function deleteCard(id: string) {
+    setCards((prevCards) => prevCards.filter((card) => card.id !== id));
+  }
+
+  function handleEditCard(card: Card) {
+    setEditingCard(card);
+    setEditOpen(true);
+  }
+
+  function editCard(id: string, text: string, columnId: string) {
+    setCards((prevCards) =>
+      prevCards.map((card) => {
+        if (card.id !== id) {
+          return card;
+        }
+
+        const column = kanbans.find((column) => column.id === columnId);
+
+        return {
+          ...card,
+          text,
+          column_id: columnId,
+          status: column?.status ?? card.status,
+        };
+      }),
+    );
+  }
+  if (!isLoaded) {
+    return <div>Loading...</div>;
+  }
+
+  function handleDone(id: string) {
+    setCards((prevCards) =>
+      prevCards.map((card) => {
+        if (card.id !== id) {
+          return card;
+        }
+        const columnCards = prevCards.filter((card) => card.column_id === 'done');
+        const maxPosition = columnCards.length
+          ? Math.max(...columnCards.map((card) => card.position))
+          : -1;
+
+        return {
+          ...card,
+          position: maxPosition + 1,
+          column_id: 'done',
+          status: 'done',
+        };
+      }),
+    );
+  }
   return (
     <>
-      <AddTask onAddTask={addTask} />
+      {editingCard && (
+        <EditCard
+          card={editingCard}
+          open={editOpen}
+          onOpenChange={setEditOpen}
+          onEditCard={editCard}
+        />
+      )}
       <div className="mt-8">
-        <h1 className="text-4xl font-bold text-center text-4xl">
+        <h1 className="text-4xl text-ring font-bold text-center font-['Pacifico',_cursive]">
           Kanban Board
         </h1>
+        <AddTask onAddTask={addTask} />
         <div className="mt-4 p-2 flex justify-between items-center">
           {kanbans.map((column) => (
             <KabanColumn
@@ -130,6 +194,9 @@ export default function KanbanBoard(props: Props) {
               draggedCardId={dragedElement?.c_id ?? null}
               onDragStart={onDragCard}
               onDrop={onDropCard}
+              onDelete={deleteCard}
+              onEdit={handleEditCard}
+              onDone={handleDone}
             />
           ))}
         </div>

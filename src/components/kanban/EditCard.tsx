@@ -6,7 +6,6 @@ import {
   DialogContent,
   DialogHeader,
   DialogTitle,
-  DialogTrigger,
   DialogDescription,
   DialogFooter,
   DialogClose,
@@ -23,29 +22,33 @@ import {
   SelectGroup,
 } from '../ui/select';
 import { columnsData } from './DataObject';
-import { useState } from 'react';
-import { Plus } from 'lucide-react';
+import { useState, useEffect } from 'react';
+import type { Card } from './DataObject';
 
-interface AddTaskProps {
-  onAddTask: (text: string, columnId: string) => void;
+interface EditCardProps {
+  card: Card;
+  open: boolean;
+  onOpenChange: (open: boolean) => void;
+  onEditCard: (id: string, text: string, columnId: string) => void;
 }
 
-export default function AddTask({ onAddTask }: AddTaskProps) {
-  const [selectedColumn, setSelectedColumn] = useState('');
-  const [taskText, setTaskText] = useState('');
-  const [open, setOpen] = useState(false);
+export default function EditCard({
+  card,
+  open,
+  onOpenChange,
+  onEditCard,
+}: EditCardProps) {
+  console.log('editing card:', card);
+  const [selectedColumn, setSelectedColumn] = useState(card.column_id);
+  const [taskText, setTaskText] = useState(card.text);
+
+  useEffect(() => {
+    setTaskText(card.text);
+    setSelectedColumn(card.column_id);
+  }, [card]);
 
   return (
-    <Dialog open={open} onOpenChange={setOpen}>
-      <DialogTrigger
-        render={
-          <Button className='mt-4 ml-2'>
-            <Plus />
-            Add Task
-          </Button>
-        }
-      />
-
+    <Dialog open={open} onOpenChange={onOpenChange}>
       <DialogContent className="sm:max-w-sm">
         <form
           onSubmit={(e) => {
@@ -55,15 +58,13 @@ export default function AddTask({ onAddTask }: AddTaskProps) {
               return;
             }
 
-            onAddTask(taskText, selectedColumn);
-            setOpen(false);
-            setTaskText('');
-            setSelectedColumn('');
+            onEditCard(card.id, taskText, selectedColumn);
+            onOpenChange(false);
           }}
         >
           <DialogHeader>
-            <DialogTitle>Add task</DialogTitle>
-            <DialogDescription>Create new task</DialogDescription>
+            <DialogTitle>Edit task</DialogTitle>
+            <DialogDescription>Make changes to your task</DialogDescription>
           </DialogHeader>
 
           <FieldGroup>
