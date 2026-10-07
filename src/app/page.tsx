@@ -1,10 +1,9 @@
-
-import KanbanBoard from "./kanban/page";
-
+import KanbanBoard from "@/components/kanban/KanbanBoard";
 
 export default function Home() {
   return (
-     <KanbanBoard />
-  )
-
+    <main className="bg-primary-foreground">
+      <KanbanBoard />
+    </main>
+  );
 }

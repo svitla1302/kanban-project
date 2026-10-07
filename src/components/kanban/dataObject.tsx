@@ -20,6 +20,14 @@ export const columnsData = [
   },
 ];
 
+export interface Card {
+  id: string;
+  column_id: string;
+  text: string;
+  status: string;
+  position: number;
+}
+
 export const cardsData = Array.from({ length: 10 }, (_, index) => {
   const column_id = faker.helpers.arrayElement(columnsData).id;
   return {
