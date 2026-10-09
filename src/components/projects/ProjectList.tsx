@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import ProjectCard from './ProjectCard';
 import { projectsData, type Project } from './DataObject';
 import { cardsData } from '../kanban/DataObject';
@@ -11,13 +11,30 @@ import AddProject from './AddProject';
 interface Props {}
 
 export default function ProjectList() {
-  const [cards, setCards] = useState<Card[]>(cardsData);
+  const [cards, setCards] = useState<Card[]>([]);
   const [projects, setProjects] = useState<Project[]>(projectsData);
   const [editingProject, setEdititngProject] = useState<Project | null>(null);
   const [editOpen, setEditOpen] = useState(false);
 
+  useEffect(() => {
+    try {
+      const savedCards = localStorage.getItem('kanban-cards');
+
+      if (savedCards) {
+        setCards(JSON.parse(savedCards));
+      } else {
+        setCards(cardsData);
+      }
+    } catch {
+      setCards(cardsData);
+    }
+  }, []);
+
   function deleteProject(id: string) {
-    setCards((prevCards) => prevCards.filter((card) => card.id !== id));
+    setProjects((prevProjects) =>
+      prevProjects.filter((project) => project.id !== id),
+    );
+    setCards((prevCards) => prevCards.filter((card) => card.project_id !== id));
   }
 
   function handleEditProject(project: Project) {
