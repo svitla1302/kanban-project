@@ -1,6 +1,6 @@
 'use client';
 
-import KanbanBoard from '@/components/kanban/KanbanBoard';
+import KanbanBoard from '@/components/kanban/KanbanBoard-temp';
 import ProjectList from '@/components/projects/ProjectList';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import AppLayout from '@/components/sidebar/AppLayout';
