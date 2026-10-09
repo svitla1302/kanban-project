@@ -4,7 +4,7 @@ import { Pencil, Trash2 } from 'lucide-react';
 import { Button } from '../ui/button';
 import { ButtonGroup } from '../ui/button-group';
 import { Project } from './DataObject';
-import { Card, cardsData } from '../kanban/DataObject';
+import type { Card } from '../kanban/DataObject';
 import { Link } from 'react-router-dom';
 
 interface ProjectCardProps {
