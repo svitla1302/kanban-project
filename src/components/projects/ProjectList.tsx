@@ -2,17 +2,17 @@
 
 import { useEffect, useState } from 'react';
 import ProjectCard from './ProjectCard';
-import { projectsData, type Project } from './DataObject';
+import type { Project }  from './DataObject';
 import { cardsData } from '../kanban/DataObject';
 import type { Card } from '../kanban/DataObject';
 import EditProject from './EditProject';
 import AddProject from './AddProject';
+import { useProjects } from './ProjectsContext';
 
-interface Props {}
 
 export default function ProjectList() {
   const [cards, setCards] = useState<Card[]>([]);
-  const [projects, setProjects] = useState<Project[]>(projectsData);
+  const {projects, setProjects} = useProjects();
   const [editingProject, setEdititngProject] = useState<Project | null>(null);
   const [editOpen, setEditOpen] = useState(false);
 
