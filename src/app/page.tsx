@@ -1,9 +1,15 @@
-import KanbanBoard from "@/components/kanban/KanbanBoard";
+'use client'
+
+import ProjectList from "@/components/projects/ProjectList";
+// import App from "./App";
+import dynamic from "next/dynamic";
+
+const App = dynamic(() => import('./App'), {
+  ssr: false,
+})
 
 export default function Home() {
   return (
-    <main className="bg-primary-foreground">
-      <KanbanBoard />
-    </main>
+    <App />
   );
 }

@@ -1,4 +1,5 @@
 import { faker } from '@faker-js/faker';
+import { projectsData } from '../projects/DataObject';
 
 faker.seed(123);
 
@@ -22,6 +23,7 @@ export const columnsData = [
 
 export interface Card {
   id: string;
+  project_id: string;
   column_id: string;
   text: string;
   status: string;
@@ -32,6 +34,7 @@ export const cardsData = Array.from({ length: 10 }, (_, index) => {
   const column_id = faker.helpers.arrayElement(columnsData).id;
   return {
     id: faker.string.uuid(),
+    project_id: faker.helpers.arrayElement(projectsData).id,
     position: index,
     column_id,
     text: faker.lorem.sentence(),
