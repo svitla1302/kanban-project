@@ -5,15 +5,25 @@ import KabanColumn from './KanbanColumn';
 import AddTask from './AddTask';
 import EditCard from './EditCard';
 import type { Card } from './DataObject';
+import { useParams } from 'react-router-dom';
 
 interface Props {}
 
-export default function KanbanBoard(props: Props) {
-  const [cards, setCards] = useState(cardsData);
+export default function KanbanBoard() {
+  const { projectId } = useParams<{ projectId: string }>();
+
+  const [cards, setCards] = useState<Card[]>([]);
   const [kanbans, setKanbans] = useState(columnsData);
   const [isLoaded, setIsLoaded] = useState(false);
   const [editingCard, setEditingCard] = useState<Card | null>(null);
   const [editOpen, setEditOpen] = useState(false);
+
+  const [dragedElement, setDragedElement] = useState<{
+    c_id: string;
+    p_id: string;
+  } | null>(null);
+
+  
 
   useEffect(() => {
     try {
@@ -21,9 +31,11 @@ export default function KanbanBoard(props: Props) {
 
       if (savedCards) {
         setCards(JSON.parse(savedCards));
+      } else {
+        setCards(cardsData);
       }
     } catch {
-      localStorage.removeItem('kanban-cards');
+      setCards([]);
     }
 
     setIsLoaded(true);
@@ -34,12 +46,8 @@ export default function KanbanBoard(props: Props) {
       return;
     }
     localStorage.setItem('kanban-cards', JSON.stringify(cards));
-  }, [cards]);
+  }, [cards, isLoaded]);
 
-  const [dragedElement, setDragedElement] = useState<{
-    c_id: string;
-    p_id: string;
-  } | null>(null);
 
   function onDragCard(id: string, p_id: string) {
     setDragedElement({
@@ -59,7 +67,7 @@ export default function KanbanBoard(props: Props) {
 
     const updateCards = cards.filter((card) => card.id !== draggedCardId);
     const targetColumnCard = updateCards
-      .filter((card) => card.column_id === targetColumnId)
+      .filter((card) => card.project_id === projectId && card.column_id === targetColumnId)
       .sort((a, b) => a.position - b.position);
 
     let targetIndex = targetColumnCard.length;
@@ -99,17 +107,24 @@ export default function KanbanBoard(props: Props) {
   }
 
   function addTask(text: string, columnId: string) {
+    if (!projectId) {
+  return <div>Project not found</div>;
+}
     const column = kanbans.find((column) => column.id === columnId);
 
     if (!column) return;
 
-    const columnCards = cards.filter((card) => card.column_id === columnId);
+    const columnCards = cards.filter((card) => 
+      card.project_id === projectId &&
+      card.column_id === columnId);
+      
     const maxPosition = columnCards.length
       ? Math.max(...columnCards.map((card) => card.position))
       : -1;
 
     const newCard = {
       id: crypto.randomUUID(),
+      project_id: projectId,
       position: maxPosition + 1,
       column_id: columnId,
       text,
@@ -156,7 +171,9 @@ export default function KanbanBoard(props: Props) {
         if (card.id !== id) {
           return card;
         }
-        const columnCards = prevCards.filter((card) => card.column_id === 'done');
+        const columnCards = prevCards.filter(
+          (card) => card.column_id === 'done',
+        );
         const maxPosition = columnCards.length
           ? Math.max(...columnCards.map((card) => card.position))
           : -1;
@@ -190,7 +207,7 @@ export default function KanbanBoard(props: Props) {
             <KabanColumn
               key={column.id}
               column={column}
-              cards={cards}
+              cards={cards.filter((card) => card.project_id === projectId)}
               draggedCardId={dragedElement?.c_id ?? null}
               onDragStart={onDragCard}
               onDrop={onDropCard}
