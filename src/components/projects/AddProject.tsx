@@ -55,9 +55,9 @@ export default function AddProject({ onAddProject }: AddProjectProps) {
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger
         render={
-          <Button className="mt-4 ml-2">
+          <Button className="mt-4 ml-2 h-12">
             <Plus />
-            Create new project
+            <h5>Create new project</h5> 
           </Button>
         }
       />

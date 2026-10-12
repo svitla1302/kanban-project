@@ -83,7 +83,7 @@ export default function ProjectList() {
       )}
       <div className="mt-2">
         <h1 className="text-4xl text-ring font-bold text-center font-['Pacifico',_cursive]">
-          Your projects
+          My projects
         </h1>
 
         <div className='mt-4 flex px-2 items-center justify-between gap-2'>
@@ -125,6 +125,7 @@ export default function ProjectList() {
               cards={cards}
               onDelete={deleteProject}
               onEdit={handleEditProject}
+              viewMode={viewMode}
             />
           ))}
         </div>
