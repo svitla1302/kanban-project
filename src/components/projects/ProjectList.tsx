@@ -2,19 +2,21 @@
 
 import { useEffect, useState } from 'react';
 import ProjectCard from './ProjectCard';
-import type { Project }  from './DataObject';
+import type { Project } from './DataObject';
 import { cardsData } from '../kanban/DataObject';
 import type { Card } from '../kanban/DataObject';
 import EditProject from './EditProject';
 import AddProject from './AddProject';
 import { useProjects } from './ProjectsContext';
-
+import { Button } from '../ui/button';
+import { LayoutGrid, List, Tally1 } from 'lucide-react';
 
 export default function ProjectList() {
   const [cards, setCards] = useState<Card[]>([]);
-  const {projects, setProjects} = useProjects();
+  const { projects, setProjects } = useProjects();
   const [editingProject, setEdititngProject] = useState<Project | null>(null);
   const [editOpen, setEditOpen] = useState(false);
+  const [viewMode, setViewMode] = useState<'grid' | 'list'>('grid');
 
   useEffect(() => {
     try {
@@ -79,12 +81,43 @@ export default function ProjectList() {
           onEditProject={editProject}
         />
       )}
-      <div className="mt-8">
+      <div className="mt-2">
         <h1 className="text-4xl text-ring font-bold text-center font-['Pacifico',_cursive]">
           Your projects
         </h1>
-        <AddProject onAddProject={addProject} />
-        <div className="mt-4 p-2 grid grid-cols-[repeat(auto-fit,minmax(280px,1fr))] gap-4">
+
+        <div className='mt-4 flex px-2 items-center justify-between gap-2'>
+          <AddProject onAddProject={addProject} />
+
+          <div className="flex items-center gap-1">
+            <Button
+              variant={viewMode === 'grid' ? 'secondary' : 'ghost'}
+              size="icon"
+              onClick={() => setViewMode('grid')}
+              aria-label="Grid view"
+              aria-pressed={viewMode === 'grid'}
+            >
+              <LayoutGrid />
+            </Button>
+            <Button
+              variant={viewMode === 'list' ? 'secondary' : 'ghost'}
+              size="icon"
+              onClick={() => setViewMode('list')}
+              aria-label="List view"
+              aria-pressed={viewMode === 'list'}
+            >
+              <List />
+            </Button>
+          </div>
+        </div>
+
+        <div
+          className={
+            viewMode === 'grid'
+              ? 'mt-8 ml-4 grid grid-cols-[repeat(auto-fit,minmax(280px,1fr))] gap-4'
+              : 'mt-8 ml-4 flex flex-col gap-2'
+          }
+        >
           {projects.map((project) => (
             <ProjectCard
               key={project.id}

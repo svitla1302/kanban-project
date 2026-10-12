@@ -11,7 +11,7 @@ import {
   SidebarMenuSubItem,
   SidebarMenuSubButton,
 } from '@/components/ui/sidebar';
-import { FolderKanban, List } from 'lucide-react';
+import { Dot, FolderKanban, List } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { Button } from '../ui/button';
 import {
@@ -30,13 +30,12 @@ export function AppSidebar({ projects }: AppSidebarProps) {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
-    <Sidebar>
-      <SidebarHeader className="bg-ring text-center text-accent rounded-xl shadow-lg">
+    <Sidebar >
+      <SidebarHeader className="bg-ring text-center text-accent rounded-xl shadow-lg ml-2">
         <h5 className="font-semibold">Your work</h5>
       </SidebarHeader>
 
-      <SidebarContent>
-        
+      <SidebarContent className='ml-2'>
         <SidebarGroupLabel>Workspace</SidebarGroupLabel>
         <SidebarMenu>
           <Collapsible open={isOpen} onOpenChange={setIsOpen}>
@@ -64,27 +63,29 @@ export function AppSidebar({ projects }: AppSidebarProps) {
                 />
               </div>
 
-              <CollapsibleContent>
-                {projects.map((project) => (
-                  <SidebarMenuSubItem key={project.id}>
-                    <SidebarMenuSubButton
-                      className="flex-1 border rounded-none"
-                      render={<Link to={`/projects/${project.id}`} />}
-                      title={project.name}
-                    >
-                      <span className="truncate">
-                        {project.name.length > 20
-                          ? `${project.name.slice(0, 20)}...`
-                          : project.name}
-                      </span>
-                    </SidebarMenuSubButton>
-                  </SidebarMenuSubItem>
-                ))}
-              </CollapsibleContent>
+              <div className="max-h-40 overflow-y-auto">
+                <CollapsibleContent>
+                  {projects.map((project) => (
+                    <SidebarMenuSubItem key={project.id}>
+                      <SidebarMenuSubButton
+                        className="flex-1  rounded-none"
+                        render={<Link to={`/projects/${project.id}`} />}
+                        title={project.name}
+                      >
+                        <span className="truncate flex items-center gap-1 min-w-0">
+                          <Dot className="shrink-0" />
+                          {project.name.length > 20
+                            ? `${project.name.slice(0, 20)}...`
+                            : project.name}
+                        </span>
+                      </SidebarMenuSubButton>
+                    </SidebarMenuSubItem>
+                  ))}
+                </CollapsibleContent>
+              </div>
             </SidebarMenuItem>
           </Collapsible>
         </SidebarMenu>
-       
       </SidebarContent>
       <SidebarFooter />
     </Sidebar>
