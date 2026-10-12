@@ -8,7 +8,7 @@ export interface Project {
   position: number;
 }
 
-export const projectsData: Project[] = Array.from({ length: 5 }, (_, index) => {
+export const projectsData: Project[] = Array.from({ length: 20 }, (_, index) => {
   return {
     id: faker.string.uuid(),
     position: index,

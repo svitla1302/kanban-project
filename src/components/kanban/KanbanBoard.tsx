@@ -1,16 +1,21 @@
 'use client';
-import React, { useEffect, useState, useRef } from 'react';
+import React, { useEffect, useState} from 'react';
 import { cardsData, columnsData } from './DataObject';
 import KabanColumn from './KanbanColumn';
 import AddTask from './AddTask';
 import EditCard from './EditCard';
 import type { Card } from './DataObject';
 import { useParams } from 'react-router-dom';
+import { useProjects } from '../projects/ProjectsContext';
 
 interface Props {}
 
 export default function KanbanBoard() {
+  const { projects } = useProjects();
   const { projectId } = useParams<{ projectId: string }>();
+
+  const project =projects.find((p) => p.id === projectId);
+  const projectName = project?.name ?? 'Project';
 
   const [cards, setCards] = useState<Card[]>([]);
   const [kanbans, setKanbans] = useState(columnsData);
@@ -199,7 +204,7 @@ export default function KanbanBoard() {
       )}
       <div className="mt-8">
         <h1 className="text-4xl text-ring font-bold text-center font-['Pacifico',_cursive]">
-          Kanban Board
+          {projectName}
         </h1>
         <AddTask onAddTask={addTask} />
         <div className="mt-4 p-2 flex justify-between items-center">

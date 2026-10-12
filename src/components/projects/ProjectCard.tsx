@@ -37,8 +37,8 @@ export default function ProjectCard({
 
       <div className="flex-1 mt-4 ml-2 min-h-0 overflow-y-auto pr-8">
         <p className="break-words">{project.name}</p>
-        <p> {taskCount} tasks</p>
       </div>
+      <p className='ml-4 text-color-primary'> {taskCount} tasks</p>
 
       <Link to={`/projects/${project.id}`}
       className='bg-ring text-background text-center self-center w-fit rounded-3xl shadow-sm border px-3 py-2'>Open project</Link>
