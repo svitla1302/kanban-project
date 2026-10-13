@@ -1,0 +1,54 @@
+{
+  "AppSidebar": {
+    "title": "Твоя робота",
+    "subtitle": "Робочий простір",
+    "projectsMenuButton": "Проєкти",
+    "language": "Мова"
+  },
+  "ProjectsList": {
+    "header": "Мої проєкти"
+  },
+  "AddProject": {
+    "addProjectButton": "Створити новий проєкт",
+    "dialogTitle": "Додати проєкт",
+    "dialogDescription": "Створити новий проєкт",
+    "projectName": "Назва проєкту",
+    "dialogFooter": {
+      "close": "Скасувати",
+      "save": "Зберегти"
+    }
+  },
+  "AddTask": {
+    "addTaskButton": "Додати завдання",
+    "dialogTitle": "Додати завдання",
+    "dialogDescription": "Створити нове завдання",
+    "labelTitle": "Назва завдання",
+    "selectColumn": "Обрати колонку",
+    "dialogFooter": {
+      "close": "Скасувати",
+      "save": "Зберегти"
+    }
+  },
+  "EditCard": {
+    "dialogTitle": "Редагувати завдання",
+    "dialogDescription": "Внесіть зміни в ваше завдання",
+    "labelTitle": "Назва завдання",
+    "selectColumn": "Обрати колонку",
+    "dialogFooter": {
+      "close": "Скасувати",
+      "save": "Зберегти"
+    }
+  },
+  "DataObject": {
+    "columnsData": {
+      "todo": "До виконання",
+      "inprogress": "В процесі",
+      "done": "Готово"
+    }
+  },
+  "ProjectCard": {
+    "tasksCount": "{count, plural, one {# завдання} few {# завдання} many {# завдань} other {# завдання}}",
+    "openProject": "Відкрити проєкт"
+  }
+
+}

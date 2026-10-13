@@ -6,6 +6,7 @@ import { ButtonGroup } from '../ui/button-group';
 import { Project } from './DataObject';
 import type { Card } from '../kanban/DataObject';
 import { Link } from 'react-router-dom';
+import { useTranslations } from 'next-intl';
 
 type ViewMode = 'grid' | 'list';
 
@@ -24,9 +25,13 @@ export default function ProjectCard({
   onDelete,
   viewMode,
 }: ProjectCardProps) {
+  const t = useTranslations('ProjectCard');
+
   const taskCount = cards.filter(
     (card) => card.project_id === project.id,
   ).length;
+
+
 
   return (
     <div
@@ -40,7 +45,7 @@ export default function ProjectCard({
       <p
         className={`text-sm text-muted-foreground ${viewMode === 'grid' ? 'ml-4' : 'sm:whitespace-nowrap'}`}
       >
-        {taskCount} tasks
+        {t('tasksCount', { count: taskCount })}
       </p>
 
       <div
@@ -50,7 +55,7 @@ export default function ProjectCard({
           to={`/projects/${project.id}`}
           className="bg-ring text-background text-center self-center w-fit rounded-3xl shadow-sm border px-3 py-2"
         >
-          Open project
+          {t('openProject')}
         </Link>
 
         <ButtonGroup orientation={viewMode === 'grid' ? 'vertical' : 'horizontal'} className={viewMode === 'grid' ? 'absolute top-2 right-2' : 'shrink-0'}>
