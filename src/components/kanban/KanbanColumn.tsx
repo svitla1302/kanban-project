@@ -4,7 +4,7 @@ import KanbanCard from "./KanbanCard";
 interface KanbanColumnProps {
   column: {
     id: string;
-    text: string;
+    translationKey: string;
     status: string;
   };
   cards: Card[];
@@ -39,7 +39,7 @@ export default function KabanColumn({
     <div 
       className="bg-card p-2 w-full mr-2 px-8 py-2 h-160 flex flex-col">
         <div className="bg-muted font-bold text-center rounded-3xl shadow-sm border">
-          <p className="text-xl text-chart-3 font-['Pacifico',_cursive]">{column.text}</p>
+          <p className="text-xl text-chart-3 font-['Pacifico',_cursive]">{column.translationKey}</p>
         </div>
 
         <div 

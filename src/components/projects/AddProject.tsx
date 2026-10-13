@@ -14,18 +14,11 @@ import {
 import { Field, FieldGroup } from '../ui/field';
 import { Label } from '../ui/label';
 import { Input } from '../ui/input';
-import {
-  Select,
-  SelectTrigger,
-  SelectItem,
-  SelectValue,
-  SelectContent,
-  SelectGroup,
-} from '../ui/select';
 import { useState } from 'react';
 import { Plus } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import { Project } from './DataObject';
+import { useTranslations } from 'next-intl';
 
 interface AddProjectProps {
   onAddProject: (name: string) => Project;
@@ -36,7 +29,7 @@ export default function AddProject({ onAddProject }: AddProjectProps) {
   const [open, setOpen] = useState(false);
 
   const navigate = useNavigate();
-
+  const t = useTranslations('AddProject');
   function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
 
@@ -57,7 +50,7 @@ export default function AddProject({ onAddProject }: AddProjectProps) {
         render={
           <Button className="mt-4 ml-2 h-12">
             <Plus />
-            <h5>Create new project</h5> 
+            <h5>{t('addProjectButton')}</h5> 
           </Button>
         }
       />
@@ -67,13 +60,13 @@ export default function AddProject({ onAddProject }: AddProjectProps) {
           onSubmit={handleSubmit}
         >
           <DialogHeader>
-            <DialogTitle>Add project</DialogTitle>
-            <DialogDescription>Create new project</DialogDescription>
+            <DialogTitle>{t('dialogTitle')}</DialogTitle>
+            <DialogDescription>{t('dialogDescription')}</DialogDescription>
           </DialogHeader>
 
           <FieldGroup>
             <Field>
-              <Label htmlFor="project">Project name</Label>
+              <Label htmlFor="project">{t('projectName')}</Label>
               <Input
                 id="project"
                 name="name"
@@ -83,8 +76,8 @@ export default function AddProject({ onAddProject }: AddProjectProps) {
             </Field>
           </FieldGroup>
           <DialogFooter>
-            <DialogClose render={<Button variant="outline">Cancel</Button>} />
-            <Button type="submit">Save changes</Button>
+            <DialogClose render={<Button variant="outline">{t('dialogFooter.close')}</Button>} />
+            <Button type="submit">{t('dialogFooter.save')}</Button>
           </DialogFooter>
         </form>
       </DialogContent>

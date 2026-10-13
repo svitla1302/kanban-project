@@ -6,17 +6,17 @@ faker.seed(123);
 export const columnsData = [
   {
     id: 'todo',
-    text: 'ToDo',
+    translationKey: 'todo',
     status: 'todo'
   },
   {
     id: 'inprogress',
-    text: 'InProgress',
+    translationKey: 'inprogress',
     status: 'inprogress'
   },
   {
     id: 'done',
-    text: 'Done',
+    translationKey: 'done',
     status: 'done'
   },
 ];

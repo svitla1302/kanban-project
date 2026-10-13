@@ -9,7 +9,8 @@ import EditProject from './EditProject';
 import AddProject from './AddProject';
 import { useProjects } from './ProjectsContext';
 import { Button } from '../ui/button';
-import { LayoutGrid, List, Tally1 } from 'lucide-react';
+import { LayoutGrid, List } from 'lucide-react';
+import { useTranslations } from 'next-intl';
 
 export default function ProjectList() {
   const [cards, setCards] = useState<Card[]>([]);
@@ -17,6 +18,7 @@ export default function ProjectList() {
   const [editingProject, setEdititngProject] = useState<Project | null>(null);
   const [editOpen, setEditOpen] = useState(false);
   const [viewMode, setViewMode] = useState<'grid' | 'list'>('grid');
+  const t = useTranslations('ProjectsList');
 
   useEffect(() => {
     try {
@@ -82,8 +84,8 @@ export default function ProjectList() {
         />
       )}
       <div className="mt-2">
-        <h1 className="text-4xl text-ring font-bold text-center font-['Pacifico',_cursive]">
-          My projects
+        <h1 className="text-4xl text-ring font-bold text-center font-heading">
+          {t('header')}
         </h1>
 
         <div className='mt-4 flex px-2 items-center justify-between gap-2'>
