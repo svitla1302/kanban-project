@@ -59,10 +59,11 @@ export default function ProjectList() {
     );
   }
 
-  function addProject(name: string) {
+  function addProject(name: string, text: string) {
     const newProject = {
       id: crypto.randomUUID(),
       name,
+      text,
       position: projects.length,
     };
 
