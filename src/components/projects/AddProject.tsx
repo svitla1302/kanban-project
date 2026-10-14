@@ -21,11 +21,12 @@ import { Project } from './DataObject';
 import { useTranslations } from 'next-intl';
 
 interface AddProjectProps {
-  onAddProject: (name: string) => Project;
+  onAddProject: (name: string, text: string) => Project;
 }
 
 export default function AddProject({ onAddProject }: AddProjectProps) {
   const [projectName, setProjectName] = useState('');
+  const [projectText, setProjectText] = useState('');
   const [open, setOpen] = useState(false);
 
   const navigate = useNavigate();
@@ -36,10 +37,11 @@ export default function AddProject({ onAddProject }: AddProjectProps) {
     if (!projectName.trim()) {
       return;
     }
-    const newProject = onAddProject(projectName);
+    const newProject = onAddProject(projectName, projectText);
 
     setOpen(false);
     setProjectName('');
+    setProjectText('');
 
     navigate(`/projects/${newProject.id}`);
   }
@@ -66,12 +68,21 @@ export default function AddProject({ onAddProject }: AddProjectProps) {
 
           <FieldGroup>
             <Field>
-              <Label htmlFor="project">{t('projectName')}</Label>
+              <Label htmlFor="project-name">{t('projectName')}</Label>
               <Input
-                id="project"
+                id="project-name"
                 name="name"
                 value={projectName}
                 onChange={(e) => setProjectName(e.target.value)}
+              />
+            </Field>
+            <Field>
+              <Label htmlFor="project-text">{t('projectText')}</Label>
+              <Input
+                id="project-text"
+                name="text"
+                value={projectText}
+                onChange={(e) => setProjectText(e.target.value)}
               />
             </Field>
           </FieldGroup>

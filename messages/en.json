@@ -13,6 +13,17 @@
     "dialogTitle": "Add project",
     "dialogDescription": "Create new project",
     "projectName": "Project name",
+    "projectText": "Project description",
+    "dialogFooter": {
+      "close": "Cancel",
+      "save": "Save"
+    }
+  },
+  "EditProject": {
+    "dialogTitle": "Edit project",
+    "dialogDescription": "Edit project",
+    "projectName": "Project name",
+    "projectText": "Project description",
     "dialogFooter": {
       "close": "Cancel",
       "save": "Save"
