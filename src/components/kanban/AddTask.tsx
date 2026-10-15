@@ -25,6 +25,7 @@ import {
 import { columnsData } from './DataObject';
 import { useState } from 'react';
 import { Plus } from 'lucide-react';
+import { useTranslations } from 'next-intl';
 
 interface AddTaskProps {
   onAddTask: (text: string, columnId: string) => void;
@@ -35,13 +36,15 @@ export default function AddTask({ onAddTask }: AddTaskProps) {
   const [taskText, setTaskText] = useState('');
   const [open, setOpen] = useState(false);
 
+  const t = useTranslations('AddTask');
+
   return (
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger
         render={
           <Button className='mt-4 ml-2'>
             <Plus />
-            Add Task
+            {t('addTaskButton')}
           </Button>
         }
       />
@@ -62,13 +65,13 @@ export default function AddTask({ onAddTask }: AddTaskProps) {
           }}
         >
           <DialogHeader>
-            <DialogTitle>Add task</DialogTitle>
-            <DialogDescription>Create new task</DialogDescription>
+            <DialogTitle>{t('dialogTitle')}</DialogTitle>
+            <DialogDescription>{t('dialogDescription')}</DialogDescription>
           </DialogHeader>
 
           <FieldGroup>
             <Field>
-              <Label htmlFor="task">Task</Label>
+              <Label htmlFor="task">{t('labelTitle')}</Label>
               <Input
                 id="task"
                 name="name"
@@ -82,14 +85,14 @@ export default function AddTask({ onAddTask }: AddTaskProps) {
                 onValueChange={(value) => setSelectedColumn(value ?? '')}
               >
                 <SelectTrigger>
-                  <SelectValue placeholder="Select column" />
+                  <SelectValue placeholder={t('selectColumn')} />
                 </SelectTrigger>
 
                 <SelectContent>
                   <SelectGroup>
                     {columnsData.map((column) => (
                       <SelectItem key={column.id} value={column.id}>
-                        {column.text}
+                        {t(`columns.${column.id}`)}
                       </SelectItem>
                     ))}
                   </SelectGroup>
@@ -98,8 +101,8 @@ export default function AddTask({ onAddTask }: AddTaskProps) {
             </Field>
           </FieldGroup>
           <DialogFooter>
-            <DialogClose render={<Button variant="outline">Cancel</Button>} />
-            <Button type="submit">Save changes</Button>
+            <DialogClose render={<Button variant="outline">{t('dialogFooter.close')}</Button>} />
+            <Button type="submit">{t('dialogFooter.save')}</Button>
           </DialogFooter>
         </form>
       </DialogContent>

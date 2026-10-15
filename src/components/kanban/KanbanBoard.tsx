@@ -206,7 +206,7 @@ export default function KanbanBoard() {
         />
       )}
       <div className="mt-8">
-        <h1 className="text-4xl text-ring font-bold text-center font-['Pacifico',_cursive]">
+        <h1 className="text-4xl text-ring font-bold text-center font-heading">
           {projectName}
         </h1>
         <AddTask onAddTask={addTask} />

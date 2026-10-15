@@ -18,6 +18,7 @@ import type { Project } from './DataObject';
 import { useTranslations } from 'next-intl';
 
 
+
 interface EditProjectProps {
   project: Project;
   open: boolean;

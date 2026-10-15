@@ -25,11 +25,12 @@ export default function ProjectCard({
   onDelete,
   viewMode,
 }: ProjectCardProps) {
+  const t = useTranslations('ProjectCard');
+
   const taskCount = cards.filter(
     (card) => card.project_id === project.id,
   ).length;
 
-   const t = useTranslations('ProjectCard');
   return (
     <div
       className={`relative w-full bg-card rounded-3xl overflow-hidden shadow-sm border ${viewMode === 'grid' ? 'h-50 flex flex-col' : 'min-h-20 flex flex-col sm:flex-row gap-3'}`}
@@ -37,8 +38,6 @@ export default function ProjectCard({
       <div
         className={`bg-primary min-w-0 px-4 py-3 ${viewMode === 'grid' ? 'w-full shrink-0' : 'w-full sm:w-1/4 sm:self-stretch sm:flex sm:items-stretch sm:gap-3'}`}
       >
-        
-
         <ButtonGroup
           orientation={viewMode === 'grid' ? 'horizontal' : 'vertical'}
           className={
@@ -48,14 +47,14 @@ export default function ProjectCard({
           }
         >
           <Button
-            size='lg'
+            size="lg"
             className={viewMode === 'list' ? 'flex-1 rounded-none' : ''}
             onClick={() => onEdit(project)}
           >
             <Pencil />
           </Button>
           <Button
-            size='lg'
+            size="lg"
             className={viewMode === 'list' ? 'flex-1 rounded-none' : ''}
             onClick={() => onDelete(project.id)}
           >
@@ -63,7 +62,7 @@ export default function ProjectCard({
           </Button>
         </ButtonGroup>
 
-        <div className='min-w-0 flex-1 flex items-center'>
+        <div className="min-w-0 flex-1 flex items-center">
           <h5
             className={`break-words text-secondary ${viewMode === 'grid' ? 'pr-16' : 'ml-6'}`}
           >
@@ -71,14 +70,17 @@ export default function ProjectCard({
           </h5>
         </div>
       </div>
-      
+
+      <div className="flex flex-1 flex-col p-4 min-h-0 min-w-0">
+        <div className="min-h-0 flex-1 overflow-y-auto">
+          <p className="break-words">{project.text}</p>
+        </div>
+      </div>
 
       <div
         className={`shrink-0 ${viewMode === 'grid' ? 'flex flex-col items-center gap-2 pt-2 pb-2' : 'mt-2 pr-2 flex items-center justify-between gap-3'}`}
       >
-        <p
-          className={`text-sm text-muted-foreground `}
-        >
+        <p className={`text-sm text-muted-foreground `}>
           {t('tasksCount', { count: taskCount })}
         </p>
         <Link
@@ -89,6 +91,5 @@ export default function ProjectCard({
         </Link>
       </div>
     </div>
-    
   );
 }

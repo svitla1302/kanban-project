@@ -24,6 +24,7 @@ import {
 import { columnsData } from './DataObject';
 import { useState } from 'react';
 import type { Card } from './DataObject';
+import { useTranslations } from 'next-intl';
 
 interface EditCardProps {
   card: Card;
@@ -41,6 +42,8 @@ export default function EditCard({
   const [selectedColumn, setSelectedColumn] = useState(card.column_id);
   const [taskText, setTaskText] = useState(card.text);
 
+  const t = useTranslations('EditCard');
+
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
       <DialogContent className="sm:max-w-sm">
@@ -57,13 +60,13 @@ export default function EditCard({
           }}
         >
           <DialogHeader>
-            <DialogTitle>Edit task</DialogTitle>
-            <DialogDescription>Make changes to your task</DialogDescription>
+            <DialogTitle>{t('dialogTitle')}</DialogTitle>
+            <DialogDescription>{t('dialogDescription')}</DialogDescription>
           </DialogHeader>
 
           <FieldGroup>
             <Field>
-              <Label htmlFor="task">Task</Label>
+              <Label htmlFor="task">{t('labelTitle')}</Label>
               <Input
                 id="task"
                 name="name"
@@ -77,14 +80,14 @@ export default function EditCard({
                 onValueChange={(value) => setSelectedColumn(value ?? '')}
               >
                 <SelectTrigger>
-                  <SelectValue placeholder="Select column" />
+                  <SelectValue placeholder={t('selectColumn')} />
                 </SelectTrigger>
 
                 <SelectContent>
                   <SelectGroup>
                     {columnsData.map((column) => (
                       <SelectItem key={column.id} value={column.id}>
-                        {column.text}
+                        {t(`columns.${column.id}`)}
                       </SelectItem>
                     ))}
                   </SelectGroup>
@@ -93,8 +96,8 @@ export default function EditCard({
             </Field>
           </FieldGroup>
           <DialogFooter>
-            <DialogClose render={<Button variant="outline">Cancel</Button>} />
-            <Button type="submit">Save changes</Button>
+            <DialogClose render={<Button variant="outline">{t('dialogFooter.close')}</Button>} />
+            <Button type="submit">{t('dialogFooter.save')}</Button>
           </DialogFooter>
         </form>
       </DialogContent>

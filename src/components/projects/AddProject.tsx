@@ -52,7 +52,7 @@ export default function AddProject({ onAddProject }: AddProjectProps) {
         render={
           <Button className="mt-4 ml-2 h-12">
             <Plus />
-            <h5>Create new project</h5> 
+            <h5>{t('addProjectButton')}</h5> 
           </Button>
         }
       />
