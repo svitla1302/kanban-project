@@ -5,7 +5,7 @@ import { Button } from '../ui/button';
 import { ButtonGroup } from '../ui/button-group';
 import { Project } from './DataObject';
 import type { Card } from '../kanban/DataObject';
-import { Link } from 'react-router-dom';
+import Link from 'next/link';
 import { useTranslations } from 'next-intl';
 
 type ViewMode = 'grid' | 'list';
@@ -84,7 +84,7 @@ export default function ProjectCard({
           {t('tasksCount', { count: taskCount })}
         </p>
         <Link
-          to={`/projects/${project.id}`}
+          href={`/projects/${project.id}`}
           className="bg-ring text-background text-center self-center w-fit rounded-3xl shadow-sm border px-3 py-2"
         >
           {t('openProject')}

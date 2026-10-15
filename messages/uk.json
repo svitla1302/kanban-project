@@ -35,6 +35,11 @@
     "dialogDescription": "Створити нове завдання",
     "labelTitle": "Назва завдання",
     "selectColumn": "Статус",
+    "columns": {
+      "todo": "До виконання",
+      "inprogress": "В процесі",
+      "done": "Готово"
+    },
     "dialogFooter": {
       "close": "Скасувати",
       "save": "Зберегти"
@@ -45,6 +50,11 @@
     "dialogDescription": "Внесіть зміни в ваше завдання",
     "labelTitle": "Назва завдання",
     "selectColumn": "Статус",
+    "columns": {
+      "todo": "До виконання",
+      "inprogress": "В процесі",
+      "done": "Готово"
+    },
     "dialogFooter": {
       "close": "Скасувати",
       "save": "Зберегти"
@@ -60,6 +70,12 @@
   "ProjectCard": {
     "tasksCount": "{count, plural, one {# завдання} few {# завдання} many {# завдань} other {# завдання}}",
     "openProject": "Відкрити проєкт"
+  },
+  "KanbanCard": {
+    "columns": {
+      "todo": "До виконання",
+      "inprogress": "В процесі",
+      "done": "Готово"
+    }
   }
-
 }

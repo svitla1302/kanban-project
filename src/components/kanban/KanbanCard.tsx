@@ -3,8 +3,9 @@
 import { Pencil, Trash2 } from 'lucide-react';
 import { Button } from '../ui/button';
 import { ButtonGroup } from '../ui/button-group';
-import { Card } from './DataObject';
+import { Card, columnsData } from './DataObject';
 import { CheckCheck } from 'lucide-react';
+import { useTranslations } from 'next-intl';
 
 interface KanbanCardProps {
   card: Card;
@@ -29,6 +30,12 @@ export default function KanbanCard({
   onDelete,
   onDone,
 }: KanbanCardProps) {
+  const t = useTranslations('KanbanCard');
+
+  const column = columnsData.find(
+    (column) => column.id === card.column_id
+  );
+
   const showAction =
     card.column_id === 'todo' || card.column_id === 'inprogress';
   return (
@@ -73,7 +80,7 @@ export default function KanbanCard({
       </div>
       
 
-      <p className="text-muted-foreground bg-muted shrink-0 mt-2 text-center">{card.status}</p>
+      <p className="text-muted-foreground bg-muted shrink-0 mt-2 text-center">{column ? t(`columns.${column.translationKey}`) : card.status}</p>
     </div>
   );
 }

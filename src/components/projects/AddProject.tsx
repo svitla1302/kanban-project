@@ -16,7 +16,7 @@ import { Label } from '../ui/label';
 import { Input } from '../ui/input';
 import { useState } from 'react';
 import { Plus } from 'lucide-react';
-import { useNavigate } from 'react-router-dom';
+import  { useRouter } from 'next/navigation'
 import { Project } from './DataObject';
 import { useTranslations } from 'next-intl';
 
@@ -29,7 +29,7 @@ export default function AddProject({ onAddProject }: AddProjectProps) {
   const [projectText, setProjectText] = useState('');
   const [open, setOpen] = useState(false);
 
-  const navigate = useNavigate();
+  const router = useRouter();
   const t = useTranslations('AddProject');
   function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
@@ -43,7 +43,7 @@ export default function AddProject({ onAddProject }: AddProjectProps) {
     setProjectName('');
     setProjectText('');
 
-    navigate(`/projects/${newProject.id}`);
+    router.push(`/projects/${newProject.id}`);
   }
 
   return (

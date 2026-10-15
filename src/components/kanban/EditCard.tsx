@@ -80,14 +80,16 @@ export default function EditCard({
                 onValueChange={(value) => setSelectedColumn(value ?? '')}
               >
                 <SelectTrigger>
-                  <SelectValue placeholder={t('selectColumn')} />
+                  <SelectValue placeholder={t('selectColumn')}>
+                    {(value) => (value ? t(`columns.${value}`) : '')}
+                  </SelectValue>
                 </SelectTrigger>
 
                 <SelectContent>
                   <SelectGroup>
                     {columnsData.map((column) => (
                       <SelectItem key={column.id} value={column.id}>
-                        {t(`columns.${column.id}`)}
+                        {t(`columns.${column.translationKey}`)}
                       </SelectItem>
                     ))}
                   </SelectGroup>
@@ -96,7 +98,11 @@ export default function EditCard({
             </Field>
           </FieldGroup>
           <DialogFooter>
-            <DialogClose render={<Button variant="outline">{t('dialogFooter.close')}</Button>} />
+            <DialogClose
+              render={
+                <Button variant="outline">{t('dialogFooter.close')}</Button>
+              }
+            />
             <Button type="submit">{t('dialogFooter.save')}</Button>
           </DialogFooter>
         </form>

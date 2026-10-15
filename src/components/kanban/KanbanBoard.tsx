@@ -5,7 +5,7 @@ import KabanColumn from './KanbanColumn';
 import AddTask from './AddTask';
 import EditCard from './EditCard';
 import type { Card } from './DataObject';
-import { useParams } from 'react-router-dom';
+import { useParams } from 'next/navigation';
 import { useProjects } from '../projects/ProjectsContext';
 
 export default function KanbanBoard() {
