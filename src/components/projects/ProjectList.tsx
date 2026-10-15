@@ -9,7 +9,7 @@ import EditProject from './EditProject';
 import AddProject from './AddProject';
 import { useProjects } from './ProjectsContext';
 import { Button } from '../ui/button';
-import { LayoutGrid, List, Tally1 } from 'lucide-react';
+import { LayoutGrid, List} from 'lucide-react';
 
 export default function ProjectList() {
   const [cards, setCards] = useState<Card[]>([]);
@@ -18,6 +18,7 @@ export default function ProjectList() {
   const [editOpen, setEditOpen] = useState(false);
   const [viewMode, setViewMode] = useState<'grid' | 'list'>('grid');
 
+  /* eslint-disable react-hooks/set-state-in-effect */
   useEffect(() => {
     try {
       const savedCards = localStorage.getItem('kanban-cards');
@@ -31,6 +32,7 @@ export default function ProjectList() {
       setCards(cardsData);
     }
   }, []);
+  /* eslint-enable react-hooks/set-state-in-effect */
 
   function deleteProject(id: string) {
     setProjects((prevProjects) =>
@@ -76,6 +78,7 @@ export default function ProjectList() {
     <>
       {editingProject && (
         <EditProject
+        key={editingProject.id}
           project={editingProject}
           open={editOpen}
           onOpenChange={setEditOpen}

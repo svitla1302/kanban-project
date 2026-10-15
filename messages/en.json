@@ -1,0 +1,65 @@
+{
+  "AppSidebar": {
+    "title": "Your work",
+    "subtitle": "Workspace",
+    "projectsMenuButton": "Projects",
+    "language": "Language"
+  },
+  "ProjectsList": {
+    "header": "My projects"
+  },
+  "AddProject": {
+    "addProjectButton": "Create new project",
+    "dialogTitle": "Add project",
+    "dialogDescription": "Create new project",
+    "projectName": "Project name",
+    "projectText": "Project description",
+    "dialogFooter": {
+      "close": "Cancel",
+      "save": "Save"
+    }
+  },
+  "EditProject": {
+    "dialogTitle": "Edit project",
+    "dialogDescription": "Edit project",
+    "projectName": "Project name",
+    "projectText": "Project description",
+    "dialogFooter": {
+      "close": "Cancel",
+      "save": "Save"
+    }
+  },
+  "AddTask": {
+    "addTaskButton": "Add task",
+    "dialogTitle": "Add task",
+    "dialogDescription": "Create new task",
+    "labelTitle": "Name task",
+    "selectColumn": "Select column",
+    "dialogFooter": {
+      "close": "Cancel",
+      "save": "Save"
+    }
+  },
+  "EditCard": {
+    "dialogTitle": "Edit task",
+    "dialogDescription": "Make change to your task",
+    "selectColumn": "Select column",
+    "labelTitle": "Name task",
+    "dialogFooter": {
+      "close": "Cancel",
+      "save": "Save"
+    }
+  },
+  "DataObject": {
+    "columnsData": {
+      "todo": "To Do",
+      "inprogress": "In Progress",
+      "done": "Done"
+    }
+  },
+  "ProjectCard": {
+    "tasksCount": "{count, plural, =0 {No tasks} one {# task} other {# tasks}}",
+    "openProject": "Open project"
+  }
+
+}

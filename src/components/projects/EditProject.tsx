@@ -13,7 +13,7 @@ import {
 import { Field, FieldGroup } from '../ui/field';
 import { Label } from '../ui/label';
 import { Input } from '../ui/input';
-import { useState, useEffect } from 'react';
+import { useState} from 'react';
 import type { Project } from './DataObject';
 import { useTranslations } from 'next-intl';
 
@@ -36,10 +36,6 @@ export default function EditProject({
 
   const t = useTranslations('EditProject');
 
-  useEffect(() => {
-    setProjectName(project.name);
-    setProjectText(projectText);
-  }, [project]);
 
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>

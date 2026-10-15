@@ -22,7 +22,7 @@ import {
   SelectGroup,
 } from '../ui/select';
 import { columnsData } from './DataObject';
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import type { Card } from './DataObject';
 
 interface EditCardProps {
@@ -38,14 +38,8 @@ export default function EditCard({
   onOpenChange,
   onEditCard,
 }: EditCardProps) {
-  console.log('editing card:', card);
   const [selectedColumn, setSelectedColumn] = useState(card.column_id);
   const [taskText, setTaskText] = useState(card.text);
-
-  useEffect(() => {
-    setTaskText(card.text);
-    setSelectedColumn(card.column_id);
-  }, [card]);
 
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>

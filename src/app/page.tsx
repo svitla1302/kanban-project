@@ -1,7 +1,5 @@
 'use client'
 
-import ProjectList from "@/components/projects/ProjectList";
-// import App from "./App";
 import dynamic from "next/dynamic";
 
 const App = dynamic(() => import('./App'), {
