@@ -30,7 +30,7 @@ interface EditCardProps {
   card: Card;
   open: boolean;
   onOpenChange: (open: boolean) => void;
-  onEditCard: (id: string, text: string, columnId: string) => void;
+  onEditCard: (id: string,name: string, text: string, columnId: string) => void;
 }
 
 export default function EditCard({
@@ -41,6 +41,7 @@ export default function EditCard({
 }: EditCardProps) {
   const [selectedColumn, setSelectedColumn] = useState(card.column_id);
   const [taskText, setTaskText] = useState(card.text);
+  const [taskName, setTaskName] = useState(card.name);
 
   const t = useTranslations('EditCard');
 
@@ -55,7 +56,7 @@ export default function EditCard({
               return;
             }
 
-            onEditCard(card.id, taskText, selectedColumn);
+            onEditCard(card.id,taskName, taskText, selectedColumn);
             onOpenChange(false);
           }}
         >
@@ -70,6 +71,15 @@ export default function EditCard({
               <Input
                 id="task"
                 name="name"
+                value={taskName}
+                onChange={(e) => setTaskName(e.target.value)}
+              />
+            </Field>
+            <Field>
+              <Label htmlFor="task">{t('taskText')}</Label>
+              <Input
+                id="task"
+                name="text"
                 value={taskText}
                 onChange={(e) => setTaskText(e.target.value)}
               />
