@@ -34,6 +34,7 @@
     "dialogTitle": "Додати завдання",
     "dialogDescription": "Створити нове завдання",
     "labelTitle": "Назва завдання",
+    "taskText": "Опис завдання",
     "selectColumn": "Статус",
     "columns": {
       "todo": "До виконання",
@@ -49,6 +50,7 @@
     "dialogTitle": "Редагувати завдання",
     "dialogDescription": "Внесіть зміни в ваше завдання",
     "labelTitle": "Назва завдання",
+    "taskText": "Опис завдання",
     "selectColumn": "Статус",
     "columns": {
       "todo": "До виконання",

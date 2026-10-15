@@ -34,6 +34,7 @@
     "dialogTitle": "Add task",
     "dialogDescription": "Create new task",
     "labelTitle": "Name task",
+    "taskText": "Task description",
     "selectColumn": "Select column",
     "columns": {
       "todo": "To do",
@@ -48,8 +49,9 @@
   "EditCard": {
     "dialogTitle": "Edit task",
     "dialogDescription": "Make change to your task",
-    "selectColumn": "Select column",
+    "selectColumn": "Status",
     "labelTitle": "Name task",
+    "taskText": "Task description",
     "columns": {
       "todo": "To do",
       "inprogress": "In progress",
@@ -70,5 +72,12 @@
   "ProjectCard": {
     "tasksCount": "{count, plural, =0 {No tasks} one {# task} other {# tasks}}",
     "openProject": "Open project"
+  },
+  "KanbanCard": {
+    "columns": {
+      "todo": "To do",
+      "inprogress": "In progress",
+      "done": "Done"
+    }
   }
 }

@@ -113,7 +113,7 @@ export default function KanbanBoard() {
     setCards([...otherCards, ...cardsWithPosition]);
   }
 
-  function addTask(text: string, columnId: string) {
+  function addTask(name:string, text: string, columnId: string) {
     if (!projectId) {
       return;
     }
@@ -134,6 +134,7 @@ export default function KanbanBoard() {
       project_id: projectId,
       position: maxPosition + 1,
       column_id: columnId,
+      name,
       text,
       status: column.status,
     };
@@ -150,7 +151,7 @@ export default function KanbanBoard() {
     setEditOpen(true);
   }
 
-  function editCard(id: string, text: string, columnId: string) {
+  function editCard(id: string,name: string, text: string, columnId: string) {
     setCards((prevCards) =>
       prevCards.map((card) => {
         if (card.id !== id) {
@@ -161,6 +162,7 @@ export default function KanbanBoard() {
 
         return {
           ...card,
+          name,
           text,
           column_id: columnId,
           status: column?.status ?? card.status,

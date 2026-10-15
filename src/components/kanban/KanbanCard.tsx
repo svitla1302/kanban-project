@@ -76,6 +76,9 @@ export default function KanbanCard({
       </ButtonGroup>
 
       <div className='flex-1 mt-4 min-h-0 overflow-y-auto pr-2'>
+        <p className="break-words">{card.name}</p>
+      </div>
+      <div className='flex-1 mt-4 min-h-0 overflow-y-auto pr-2'>
         <p className="break-words">{card.text}</p>
       </div>
       

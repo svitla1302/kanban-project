@@ -28,12 +28,13 @@ import { Plus } from 'lucide-react';
 import { useTranslations } from 'next-intl';
 
 interface AddTaskProps {
-  onAddTask: (text: string, columnId: string) => void;
+  onAddTask: (name:string, text: string, columnId: string) => void;
 }
 
 export default function AddTask({ onAddTask }: AddTaskProps) {
   const [selectedColumn, setSelectedColumn] = useState('');
   const [taskText, setTaskText] = useState('');
+  const [taskName, setTaskName] = useState('');
   const [open, setOpen] = useState(false);
 
   const t = useTranslations('AddTask');
@@ -58,7 +59,7 @@ export default function AddTask({ onAddTask }: AddTaskProps) {
               return;
             }
 
-            onAddTask(taskText, selectedColumn);
+            onAddTask(taskName, taskText, selectedColumn);
             setOpen(false);
             setTaskText('');
             setSelectedColumn('');
@@ -75,6 +76,15 @@ export default function AddTask({ onAddTask }: AddTaskProps) {
               <Input
                 id="task"
                 name="name"
+                value={taskName}
+                onChange={(e) => setTaskName(e.target.value)}
+              />
+            </Field>
+            <Field>
+              <Label htmlFor="task">{t('taskText')}</Label>
+              <Input
+                id="task"
+                name="text"
                 value={taskText}
                 onChange={(e) => setTaskText(e.target.value)}
               />

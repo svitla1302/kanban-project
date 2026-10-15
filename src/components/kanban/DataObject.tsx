@@ -25,6 +25,7 @@ export interface Card {
   id: string;
   project_id: string;
   column_id: string;
+  name: string;
   text: string;
   status: string;
   position: number;
@@ -37,6 +38,7 @@ export const cardsData = Array.from({ length: 10 }, (_, index) => {
     project_id: faker.helpers.arrayElement(projectsData).id,
     position: index,
     column_id,
+    name: faker.lorem.sentence(),
     text: faker.lorem.sentence(),
     status: column_id,
   }
