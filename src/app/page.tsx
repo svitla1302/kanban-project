@@ -1,15 +1,8 @@
-'use client'
 
-import ProjectList from "@/components/projects/ProjectList";
-// import App from "./App";
-import dynamic from "next/dynamic";
+'use client';
 
-const App = dynamic(() => import('./App'), {
-  ssr: false,
-})
+import ProjectList from '@/components/projects/ProjectList';
 
 export default function Home() {
-  return (
-    <App />
-  );
+  return <ProjectList />;
 }

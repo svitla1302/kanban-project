@@ -3,6 +3,7 @@ import { Comfortaa, Nunito } from 'next/font/google';
 import './globals.css';
 import { NextIntlClientProvider } from 'next-intl';
 import { getLocale, getMessages } from 'next-intl/server';
+import Providers from './providers';
 
 const comfortaa = Comfortaa({
   variable: '--font-comfortaa',
@@ -30,7 +31,7 @@ export default async function RootLayout({ children }: LayoutProps<'/'>) {
     >
       <body className="min-h-full flex flex-col">
         <NextIntlClientProvider locale={locale} messages={messages}>
-          {children}
+          <Providers>{children}</Providers>
         </NextIntlClientProvider>
       </body>
     </html>

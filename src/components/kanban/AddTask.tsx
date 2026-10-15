@@ -42,7 +42,7 @@ export default function AddTask({ onAddTask }: AddTaskProps) {
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger
         render={
-          <Button className='mt-4 ml-2'>
+          <Button className="mt-4 ml-2">
             <Plus />
             {t('addTaskButton')}
           </Button>
@@ -85,14 +85,16 @@ export default function AddTask({ onAddTask }: AddTaskProps) {
                 onValueChange={(value) => setSelectedColumn(value ?? '')}
               >
                 <SelectTrigger>
-                  <SelectValue placeholder={t('selectColumn')} />
+                  <SelectValue placeholder={t('selectColumn')}>
+                    {(value) => (value ? t(`columns.${value}`) : '')}
+                  </SelectValue>
                 </SelectTrigger>
 
                 <SelectContent>
                   <SelectGroup>
                     {columnsData.map((column) => (
                       <SelectItem key={column.id} value={column.id}>
-                        {t(`columns.${column.id}`)}
+                        {t(`columns.${column.translationKey}`)}
                       </SelectItem>
                     ))}
                   </SelectGroup>
@@ -101,7 +103,11 @@ export default function AddTask({ onAddTask }: AddTaskProps) {
             </Field>
           </FieldGroup>
           <DialogFooter>
-            <DialogClose render={<Button variant="outline">{t('dialogFooter.close')}</Button>} />
+            <DialogClose
+              render={
+                <Button variant="outline">{t('dialogFooter.close')}</Button>
+              }
+            />
             <Button type="submit">{t('dialogFooter.save')}</Button>
           </DialogFooter>
         </form>

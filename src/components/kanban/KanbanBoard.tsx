@@ -1,24 +1,22 @@
 'use client';
-import React, { useEffect, useState} from 'react';
+import React, { useEffect, useState } from 'react';
 import { cardsData, columnsData } from './DataObject';
 import KabanColumn from './KanbanColumn';
 import AddTask from './AddTask';
 import EditCard from './EditCard';
 import type { Card } from './DataObject';
-import { useParams } from 'react-router-dom';
+import { useParams } from 'next/navigation';
 import { useProjects } from '../projects/ProjectsContext';
-
-interface Props {}
 
 export default function KanbanBoard() {
   const { projects } = useProjects();
   const { projectId } = useParams<{ projectId: string }>();
 
-  const project =projects.find((p) => p.id === projectId);
+  const project = projects.find((p) => p.id === projectId);
   const projectName = project?.name ?? 'Project';
 
   const [cards, setCards] = useState<Card[]>([]);
-  const [kanbans, setKanbans] = useState(columnsData);
+
   const [isLoaded, setIsLoaded] = useState(false);
   const [editingCard, setEditingCard] = useState<Card | null>(null);
   const [editOpen, setEditOpen] = useState(false);
@@ -28,8 +26,9 @@ export default function KanbanBoard() {
     p_id: string;
   } | null>(null);
 
-  
+  const kanbans = columnsData;
 
+  /* eslint-disable react-hooks/set-state-in-effect */
   useEffect(() => {
     try {
       const savedCards = localStorage.getItem('kanban-cards');
@@ -45,6 +44,7 @@ export default function KanbanBoard() {
 
     setIsLoaded(true);
   }, []);
+  /* eslint-enable react-hooks/set-state-in-effect */
 
   useEffect(() => {
     if (!isLoaded) {
@@ -52,7 +52,6 @@ export default function KanbanBoard() {
     }
     localStorage.setItem('kanban-cards', JSON.stringify(cards));
   }, [cards, isLoaded]);
-
 
   function onDragCard(id: string, p_id: string) {
     setDragedElement({
@@ -72,7 +71,10 @@ export default function KanbanBoard() {
 
     const updateCards = cards.filter((card) => card.id !== draggedCardId);
     const targetColumnCard = updateCards
-      .filter((card) => card.project_id === projectId && card.column_id === targetColumnId)
+      .filter(
+        (card) =>
+          card.project_id === projectId && card.column_id === targetColumnId,
+      )
       .sort((a, b) => a.position - b.position);
 
     let targetIndex = targetColumnCard.length;
@@ -113,16 +115,16 @@ export default function KanbanBoard() {
 
   function addTask(text: string, columnId: string) {
     if (!projectId) {
-  return <div>Project not found</div>;
-}
+      return;
+    }
     const column = kanbans.find((column) => column.id === columnId);
 
     if (!column) return;
 
-    const columnCards = cards.filter((card) => 
-      card.project_id === projectId &&
-      card.column_id === columnId);
-      
+    const columnCards = cards.filter(
+      (card) => card.project_id === projectId && card.column_id === columnId,
+    );
+
     const maxPosition = columnCards.length
       ? Math.max(...columnCards.map((card) => card.position))
       : -1;
@@ -196,6 +198,7 @@ export default function KanbanBoard() {
     <>
       {editingCard && (
         <EditCard
+          key={editingCard.id}
           card={editingCard}
           open={editOpen}
           onOpenChange={setEditOpen}

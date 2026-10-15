@@ -13,6 +13,17 @@
     "dialogTitle": "Додати проєкт",
     "dialogDescription": "Створити новий проєкт",
     "projectName": "Назва проєкту",
+    "projectText": "Опис проєкту",
+    "dialogFooter": {
+      "close": "Скасувати",
+      "save": "Зберегти"
+    }
+  },
+  "EditProject": {
+    "dialogTitle": "Редагувати проєкт",
+    "dialogDescription": "Редагувати проєкт",
+    "projectName": "Назва проєкту",
+    "projectText": "Опис проєкту",
     "dialogFooter": {
       "close": "Скасувати",
       "save": "Зберегти"
@@ -23,7 +34,12 @@
     "dialogTitle": "Додати завдання",
     "dialogDescription": "Створити нове завдання",
     "labelTitle": "Назва завдання",
-    "selectColumn": "Обрати колонку",
+    "selectColumn": "Статус",
+    "columns": {
+      "todo": "До виконання",
+      "inprogress": "В процесі",
+      "done": "Готово"
+    },
     "dialogFooter": {
       "close": "Скасувати",
       "save": "Зберегти"
@@ -33,7 +49,12 @@
     "dialogTitle": "Редагувати завдання",
     "dialogDescription": "Внесіть зміни в ваше завдання",
     "labelTitle": "Назва завдання",
-    "selectColumn": "Обрати колонку",
+    "selectColumn": "Статус",
+    "columns": {
+      "todo": "До виконання",
+      "inprogress": "В процесі",
+      "done": "Готово"
+    },
     "dialogFooter": {
       "close": "Скасувати",
       "save": "Зберегти"
@@ -49,6 +70,12 @@
   "ProjectCard": {
     "tasksCount": "{count, plural, one {# завдання} few {# завдання} many {# завдань} other {# завдання}}",
     "openProject": "Відкрити проєкт"
+  },
+  "KanbanCard": {
+    "columns": {
+      "todo": "До виконання",
+      "inprogress": "В процесі",
+      "done": "Готово"
+    }
   }
-
 }

@@ -20,6 +20,7 @@ export default function ProjectList() {
   const [viewMode, setViewMode] = useState<'grid' | 'list'>('grid');
   const t = useTranslations('ProjectsList');
 
+  /* eslint-disable react-hooks/set-state-in-effect */
   useEffect(() => {
     try {
       const savedCards = localStorage.getItem('kanban-cards');
@@ -33,6 +34,7 @@ export default function ProjectList() {
       setCards(cardsData);
     }
   }, []);
+  /* eslint-enable react-hooks/set-state-in-effect */
 
   function deleteProject(id: string) {
     setProjects((prevProjects) =>
@@ -46,7 +48,7 @@ export default function ProjectList() {
     setEditOpen(true);
   }
 
-  function editProject(id: string, name: string) {
+  function editProject(id: string, name: string, text: string) {
     setProjects((prevProject) =>
       prevProject.map((project) => {
         if (project.id !== id) {
@@ -56,15 +58,17 @@ export default function ProjectList() {
         return {
           ...project,
           name,
+          text
         };
       }),
     );
   }
 
-  function addProject(name: string) {
+  function addProject(name: string, text: string) {
     const newProject = {
       id: crypto.randomUUID(),
       name,
+      text,
       position: projects.length,
     };
 
@@ -77,6 +81,7 @@ export default function ProjectList() {
     <>
       {editingProject && (
         <EditProject
+        key={editingProject.id}
           project={editingProject}
           open={editOpen}
           onOpenChange={setEditOpen}

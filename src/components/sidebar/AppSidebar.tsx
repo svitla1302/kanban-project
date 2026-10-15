@@ -12,7 +12,7 @@ import {
   SidebarMenuSub,
 } from '@/components/ui/sidebar';
 import { Dot, FolderKanban, List } from 'lucide-react';
-import { Link } from 'react-router-dom';
+import Link from 'next/link';
 import { Button } from '../ui/button';
 import {
   Collapsible,
@@ -46,7 +46,7 @@ export function AppSidebar({ projects }: AppSidebarProps) {
               <div className="flex w-full items-center gap-1">
                 <SidebarMenuButton
                   className="flex-1 border"
-                  render={<Link to="/" />}
+                  render={<Link href="/" />}
                 >
                   <FolderKanban />
                   <span>{t('projectsMenuButton')}</span>
@@ -73,7 +73,7 @@ export function AppSidebar({ projects }: AppSidebarProps) {
                       <SidebarMenuSubItem key={project.id}>
                         <SidebarMenuSubButton
                           className="flex-1  rounded-none"
-                          render={<Link to={`/projects/${project.id}`} />}
+                          render={<Link href={`/projects/${project.id}`} />}
                           title={project.name}
                         >
                           <span className="truncate flex items-center gap-1 min-w-0">

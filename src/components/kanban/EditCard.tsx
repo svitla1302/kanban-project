@@ -22,7 +22,7 @@ import {
   SelectGroup,
 } from '../ui/select';
 import { columnsData } from './DataObject';
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import type { Card } from './DataObject';
 import { useTranslations } from 'next-intl';
 
@@ -39,16 +39,10 @@ export default function EditCard({
   onOpenChange,
   onEditCard,
 }: EditCardProps) {
-  console.log('editing card:', card);
   const [selectedColumn, setSelectedColumn] = useState(card.column_id);
   const [taskText, setTaskText] = useState(card.text);
 
   const t = useTranslations('EditCard');
-
-  useEffect(() => {
-    setTaskText(card.text);
-    setSelectedColumn(card.column_id);
-  }, [card]);
 
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
@@ -86,14 +80,16 @@ export default function EditCard({
                 onValueChange={(value) => setSelectedColumn(value ?? '')}
               >
                 <SelectTrigger>
-                  <SelectValue placeholder={t('selectColumn')} />
+                  <SelectValue placeholder={t('selectColumn')}>
+                    {(value) => (value ? t(`columns.${value}`) : '')}
+                  </SelectValue>
                 </SelectTrigger>
 
                 <SelectContent>
                   <SelectGroup>
                     {columnsData.map((column) => (
                       <SelectItem key={column.id} value={column.id}>
-                        {t(`columns.${column.id}`)}
+                        {t(`columns.${column.translationKey}`)}
                       </SelectItem>
                     ))}
                   </SelectGroup>
@@ -102,7 +98,11 @@ export default function EditCard({
             </Field>
           </FieldGroup>
           <DialogFooter>
-            <DialogClose render={<Button variant="outline">{t('dialogFooter.close')}</Button>} />
+            <DialogClose
+              render={
+                <Button variant="outline">{t('dialogFooter.close')}</Button>
+              }
+            />
             <Button type="submit">{t('dialogFooter.save')}</Button>
           </DialogFooter>
         </form>

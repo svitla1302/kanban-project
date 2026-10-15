@@ -13,6 +13,17 @@
     "dialogTitle": "Add project",
     "dialogDescription": "Create new project",
     "projectName": "Project name",
+    "projectText": "Project description",
+    "dialogFooter": {
+      "close": "Cancel",
+      "save": "Save"
+    }
+  },
+  "EditProject": {
+    "dialogTitle": "Edit project",
+    "dialogDescription": "Edit project",
+    "projectName": "Project name",
+    "projectText": "Project description",
     "dialogFooter": {
       "close": "Cancel",
       "save": "Save"
@@ -24,6 +35,11 @@
     "dialogDescription": "Create new task",
     "labelTitle": "Name task",
     "selectColumn": "Select column",
+    "columns": {
+      "todo": "To do",
+      "inprogress": "In progress",
+      "done": "Done"
+    },
     "dialogFooter": {
       "close": "Cancel",
       "save": "Save"
@@ -34,6 +50,11 @@
     "dialogDescription": "Make change to your task",
     "selectColumn": "Select column",
     "labelTitle": "Name task",
+    "columns": {
+      "todo": "To do",
+      "inprogress": "In progress",
+      "done": "Done"
+    },
     "dialogFooter": {
       "close": "Cancel",
       "save": "Save"
@@ -50,5 +71,4 @@
     "tasksCount": "{count, plural, =0 {No tasks} one {# task} other {# tasks}}",
     "openProject": "Open project"
   }
-
 }
