@@ -1,3 +1,4 @@
+import { useTranslations } from "next-intl";
 import { Card } from "./DataObject";
 import KanbanCard from "./KanbanCard";
 
@@ -30,6 +31,7 @@ export default function KabanColumn({
   onDelete,
   onDone
 }: KanbanColumnProps) {
+  const t = useTranslations('KanbanCard');
 
   const columnCards = cards
     .filter((card) => card.column_id === column.id)
@@ -39,7 +41,7 @@ export default function KabanColumn({
     <div 
       className="bg-card p-2 w-full mr-2 px-8 py-2 h-160 flex flex-col">
         <div className="bg-muted font-bold text-center rounded-3xl shadow-sm border">
-          <p className="text-xl text-chart-3 font-['Pacifico',_cursive]">{column.translationKey}</p>
+          <p className="text-xl text-chart-3 font-['Pacifico',_cursive]">{t(`columns.${column.translationKey}`)}</p>
         </div>
 
         <div 
