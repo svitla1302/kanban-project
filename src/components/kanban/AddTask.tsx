@@ -61,6 +61,7 @@ export default function AddTask({ onAddTask }: AddTaskProps) {
 
             onAddTask(taskName, taskText, selectedColumn);
             setOpen(false);
+            setTaskName('');
             setTaskText('');
             setSelectedColumn('');
           }}

@@ -6,7 +6,8 @@
     "language": "Language"
   },
   "ProjectsList": {
-    "header": "My projects"
+    "header": "My projects",
+    "firstProject": "Create your first project!"
   },
   "AddProject": {
     "addProjectButton": "Create new project",
@@ -16,7 +17,7 @@
     "projectText": "Project description",
     "dialogFooter": {
       "close": "Cancel",
-      "save": "Save"
+      "create": "Create"
     }
   },
   "EditProject": {

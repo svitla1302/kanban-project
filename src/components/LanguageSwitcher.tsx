@@ -1,6 +1,5 @@
 'use client';
 
-import {useRouter} from 'next/navigation';
 import { useLocale } from 'next-intl';
 
 interface CaptionType {
