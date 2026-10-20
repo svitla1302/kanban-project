@@ -25,7 +25,6 @@ export default function KanbanBoard() {
 
   const kanbans = columnsData;
 
-
   function onDragCard(id: string, p_id: string) {
     setDragedElement({
       c_id: id,
@@ -80,13 +79,14 @@ export default function KanbanBoard() {
     }));
 
     const otherCards = updateCards.filter(
-      (card) => card.column_id !== targetColumnId,
+      (card) =>
+        card.project_id != projectId || card.column_id !== targetColumnId,
     );
 
     setCards([...otherCards, ...cardsWithPosition]);
   }
 
-  function addTask(name:string, text: string, columnId: string) {
+  function addTask(name: string, text: string, columnId: string) {
     if (!projectId) {
       return;
     }
@@ -124,7 +124,7 @@ export default function KanbanBoard() {
     setEditOpen(true);
   }
 
-  function editCard(id: string,name: string, text: string, columnId: string) {
+  function editCard(id: string, name: string, text: string, columnId: string) {
     setCards((prevCards) =>
       prevCards.map((card) => {
         if (card.id !== id) {
