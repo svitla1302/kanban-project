@@ -6,7 +6,8 @@
     "language": "Мова"
   },
   "ProjectsList": {
-    "header": "Мої проєкти"
+    "header": "Мої проєкти",
+    "firstProject": "Створи свій перший проєкт, щоб почати роботу!"
   },
   "AddProject": {
     "addProjectButton": "Створити новий проєкт",
@@ -16,7 +17,7 @@
     "projectText": "Опис проєкту",
     "dialogFooter": {
       "close": "Скасувати",
-      "save": "Зберегти"
+      "create": "Створити"
     }
   },
   "EditProject": {

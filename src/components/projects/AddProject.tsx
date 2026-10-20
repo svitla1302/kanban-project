@@ -88,7 +88,7 @@ export default function AddProject({ onAddProject }: AddProjectProps) {
           </FieldGroup>
           <DialogFooter>
             <DialogClose render={<Button variant="outline">{t('dialogFooter.close')}</Button>} />
-            <Button type="submit">{t('dialogFooter.save')}</Button>
+            <Button type="submit">{t('dialogFooter.create')}</Button>
           </DialogFooter>
         </form>
       </DialogContent>

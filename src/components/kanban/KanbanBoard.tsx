@@ -1,6 +1,6 @@
 'use client';
-import React, { useEffect, useState } from 'react';
-import { cardsData, columnsData } from './DataObject';
+import { useState } from 'react';
+import { columnsData } from './DataObject';
 import KabanColumn from './KanbanColumn';
 import AddTask from './AddTask';
 import EditCard from './EditCard';
@@ -9,15 +9,12 @@ import { useParams } from 'next/navigation';
 import { useProjects } from '../projects/ProjectsContext';
 
 export default function KanbanBoard() {
-  const { projects } = useProjects();
+  const { projects, cards, setCards } = useProjects();
   const { projectId } = useParams<{ projectId: string }>();
 
   const project = projects.find((p) => p.id === projectId);
   const projectName = project?.name ?? 'Project';
 
-  const [cards, setCards] = useState<Card[]>([]);
-
-  const [isLoaded, setIsLoaded] = useState(false);
   const [editingCard, setEditingCard] = useState<Card | null>(null);
   const [editOpen, setEditOpen] = useState(false);
 
@@ -28,30 +25,6 @@ export default function KanbanBoard() {
 
   const kanbans = columnsData;
 
-  /* eslint-disable react-hooks/set-state-in-effect */
-  useEffect(() => {
-    try {
-      const savedCards = localStorage.getItem('kanban-cards');
-
-      if (savedCards) {
-        setCards(JSON.parse(savedCards));
-      } else {
-        setCards(cardsData);
-      }
-    } catch {
-      setCards([]);
-    }
-
-    setIsLoaded(true);
-  }, []);
-  /* eslint-enable react-hooks/set-state-in-effect */
-
-  useEffect(() => {
-    if (!isLoaded) {
-      return;
-    }
-    localStorage.setItem('kanban-cards', JSON.stringify(cards));
-  }, [cards, isLoaded]);
 
   function onDragCard(id: string, p_id: string) {
     setDragedElement({
@@ -169,9 +142,6 @@ export default function KanbanBoard() {
         };
       }),
     );
-  }
-  if (!isLoaded) {
-    return <div>Loading...</div>;
   }
 
   function handleDone(id: string) {
