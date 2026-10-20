@@ -34,7 +34,7 @@ export function AppSidebar({ projects }: AppSidebarProps) {
 
   return (
     <Sidebar>
-      <SidebarHeader className="bg-ring text-center text-accent rounded-xl shadow-lg ml-2">
+      <SidebarHeader className="bg-ring text-center text-accent rounded-xl shadow-lg ml-2 mt-4 mr-2">
         <h5 className="font-semibold">{t('title')}</h5>
       </SidebarHeader>
 
