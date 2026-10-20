@@ -4,6 +4,10 @@ A responsive Kanban task management app built with Next.js, React, and TypeScrip
 
 **[Live Demo](https://kanban-project-svitla1.vercel.app/)**
 
+**Status: Work in Progress** 🚧
+
+This project is under active development. I’m continuously improving its functionality, fixing bugs, and refining the user experience.
+
 ## Features
 
 - **Project management** — create, edit, and delete projects.
