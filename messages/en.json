@@ -75,6 +75,7 @@
     "openProject": "Open project"
   },
   "KanbanCard": {
+    "all": "All tasks",
     "columns": {
       "todo": "To do",
       "inprogress": "In progress",

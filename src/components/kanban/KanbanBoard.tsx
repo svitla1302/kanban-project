@@ -7,6 +7,7 @@ import EditCard from './EditCard';
 import type { Card } from './DataObject';
 import { useParams } from 'next/navigation';
 import { useProjects } from '../projects/ProjectsContext';
+import MobileKanban from './MobileKanban';
 
 export default function KanbanBoard() {
   const { projects, cards, setCards } = useProjects();
@@ -17,6 +18,8 @@ export default function KanbanBoard() {
 
   const [editingCard, setEditingCard] = useState<Card | null>(null);
   const [editOpen, setEditOpen] = useState(false);
+
+  const cardsProjectId = cards.filter((card) => card.project_id === projectId);
 
   const [dragedElement, setDragedElement] = useState<{
     c_id: string;
@@ -182,12 +185,14 @@ export default function KanbanBoard() {
           {projectName}
         </h1>
         <AddTask onAddTask={addTask} />
-        <div className="mt-4 p-2 flex justify-between items-center">
+
+        {/* Desktop */}
+        <div className="hidden md:flex mt-4 p-2 justify-between items-center">
           {kanbans.map((column) => (
             <KabanColumn
               key={column.id}
               column={column}
-              cards={cards.filter((card) => card.project_id === projectId)}
+              cards={cardsProjectId}
               draggedCardId={dragedElement?.c_id ?? null}
               onDragStart={onDragCard}
               onDrop={onDropCard}
@@ -196,6 +201,19 @@ export default function KanbanBoard() {
               onDone={handleDone}
             />
           ))}
+        </div>
+
+        {/* Mobile*/}
+        <div className="md:hidden mt-4">
+          
+            <MobileKanban
+              columns={kanbans}
+              cards={cardsProjectId}
+              onDelete={deleteCard}
+              onEdit={handleEditCard}
+              onDone={handleDone}
+            />
+          
         </div>
       </div>
     </>

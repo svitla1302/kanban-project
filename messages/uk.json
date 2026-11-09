@@ -75,6 +75,7 @@
     "openProject": "Відкрити проєкт"
   },
   "KanbanCard": {
+    "all": "Всі завдання",
     "columns": {
       "todo": "До виконання",
       "inprogress": "В процесі",
