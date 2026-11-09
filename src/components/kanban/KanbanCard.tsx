@@ -9,9 +9,9 @@ import { useTranslations } from 'next-intl';
 
 interface KanbanCardProps {
   card: Card;
-  draggedCardId: string | null;
-  onDragStart: (id: string, columnId: string) => void;
-  onDrop: (
+  draggedCardId?: string | null;
+  onDragStart?: (id: string, columnId: string) => void;
+  onDrop?: (
     draggedCardId: string,
     targetColumnId: string,
     targetCardId?: string,
@@ -32,27 +32,27 @@ export default function KanbanCard({
 }: KanbanCardProps) {
   const t = useTranslations('KanbanCard');
 
-  const column = columnsData.find(
-    (column) => column.id === card.column_id
-  );
+  const column = columnsData.find((column) => column.id === card.column_id);
 
   const showAction =
     card.column_id === 'todo' || card.column_id === 'inprogress';
   return (
     <div
       className="relative bg-card p-4 h-40 mb-2 rounded-3xl shadow-sm border flex flex-col"
-      draggable
+      draggable={Boolean(onDragStart)}
       onDragStart={() => {
-        onDragStart(card.id, card.column_id);
+        onDragStart?.(card.id, card.column_id);
       }}
       onDragOver={(e) => {
-        e.preventDefault();
+        if (onDrop) {
+          e.preventDefault();
+        }
       }}
       onDrop={(e) => {
         e.stopPropagation();
 
-        if (draggedCardId) {
-          onDrop(draggedCardId, card.column_id, card.id);
+        if (draggedCardId && onDrop) {
+          onDrop?.(draggedCardId, card.column_id, card.id);
         }
       }}
     >
@@ -75,15 +75,16 @@ export default function KanbanCard({
         </Button>
       </ButtonGroup>
 
-      <div className='flex-1 mt-4 min-h-0 overflow-y-auto pr-2'>
+      <div className="flex-1 mt-4 min-h-0 overflow-y-auto pr-2">
         <p className="break-words">{card.name}</p>
       </div>
-      <div className='flex-1 mt-4 min-h-0 overflow-y-auto pr-2'>
+      <div className="flex-1 mt-4 min-h-0 overflow-y-auto pr-2">
         <p className="break-words">{card.text}</p>
       </div>
-      
 
-      <p className="text-muted-foreground bg-muted shrink-0 mt-2 text-center">{column ? t(`columns.${column.translationKey}`) : card.status}</p>
+      <p className="text-muted-foreground bg-muted shrink-0 mt-2 text-center">
+        {column ? t(`columns.${column.translationKey}`) : card.status}
+      </p>
     </div>
   );
 }
